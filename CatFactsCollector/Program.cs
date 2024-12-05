@@ -1,3 +1,6 @@
+using CatFactsCollector.Contracts;
+using CatFactsCollector.Services;
+
 namespace CatFactsCollector;
 
 public class Program
@@ -8,7 +11,9 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddAuthorization();
-
+        builder.Services.AddControllers();
+        builder.Services.AddScoped<ICatFactService, CatFactService>();
+        builder.Services.AddHttpClient();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -22,8 +27,9 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.MapControllers();
         app.UseHttpsRedirection();
-
+        
         app.UseAuthorization();
         
 
