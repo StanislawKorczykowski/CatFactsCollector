@@ -16,4 +16,14 @@ public class CatFactController(ICatFactService catFactService, IFileService file
         fileService.AppendToFile(catFact);
         return Ok(catFact);
     }
+
+    [HttpGet]
+    [Route("/facts")]
+    public async Task<IActionResult> GetCatFacts()
+    {
+        var catFacts = await catFactService.GetCatFactsAsync();
+        if (catFacts == null) return NotFound();
+        fileService.AppendToFile(catFacts);
+        return Ok(catFacts);
+    }
 }
