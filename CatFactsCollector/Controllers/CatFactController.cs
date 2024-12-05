@@ -9,9 +9,9 @@ public class CatFactController(ICatFactService catFactService, IFileService file
 {
     [HttpGet]
     [Route("/fact")]
-    public async Task<IActionResult> GetCatFact()
+    public async Task<IActionResult> GetCatFact(int? length)
     {
-        var catFact = await catFactService.GetCatFactAsync();
+        var catFact = await catFactService.GetCatFactAsync(length);
         if (catFact == null) return NotFound();
         fileService.AppendToFile(catFact);
         return Ok(catFact);
@@ -19,9 +19,9 @@ public class CatFactController(ICatFactService catFactService, IFileService file
 
     [HttpGet]
     [Route("/facts")]
-    public async Task<IActionResult> GetCatFacts()
+    public async Task<IActionResult> GetCatFacts(int? length, int limit)
     {
-        var catFacts = await catFactService.GetCatFactsAsync();
+        var catFacts = await catFactService.GetCatFactsAsync(length, limit);
         if (catFacts == null) return NotFound();
         fileService.AppendToFile(catFacts);
         return Ok(catFacts);
