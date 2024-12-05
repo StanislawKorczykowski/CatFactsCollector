@@ -13,6 +13,7 @@ public class Program
         builder.Services.AddAuthorization();
         builder.Services.AddControllers();
         builder.Services.AddScoped<ICatFactService, CatFactService>();
+        builder.Services.AddScoped<IFileService, FileService>();
         builder.Services.AddHttpClient();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
