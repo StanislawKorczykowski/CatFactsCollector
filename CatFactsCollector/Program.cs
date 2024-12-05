@@ -19,6 +19,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        var config = builder.Configuration;
+        if (!config.GetSection("FilePath").Exists() || !config.GetSection("BaseUrl").Exists())
+            throw new Exception("Section FilePath and BaseUrl are required");
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
